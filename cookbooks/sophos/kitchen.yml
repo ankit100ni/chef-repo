@@ -1,0 +1,36 @@
+driver:
+  name: ec2
+  aws_ssh_key_id: Ankit          # Field to Update
+  region: ap-south-1             # Update the location
+  availability_zone: ap-south-1a # Field to Update
+  require_chef_omnibus: true  
+  security_group_ids: sg-0dc4e808ed38b7757 # Update as per reqiurement
+  subnet_id: subnet-1aef0973     # Field to Update
+  associate_public_ip: true
+  interface: dns
+  tags:
+    Name: "Kitchen"                          
+    X-Contact: "ankit.soni@progress.com"    
+    X-Dept: "PS"
+    X-TTL: "30"
+
+provisioner:
+  name: chef_zero
+
+platforms:
+  - name: windows-2016
+    driver:
+      # image_id: ami-04fad2f739291be60 # Windows2012R2
+      image_id: ami-090eaae8a8cf398c4 # Windows2016
+    transport:
+      name: winrm
+      elevated: true
+      username: Administrator
+      ssh_key: /Users/anksoni/Documents/Docs/SecurityPass/AWSKeys/Ankit.pem
+
+
+suites:
+  - name: default
+    verifier:
+      inspec_tests:
+        - test/integration/default   s
