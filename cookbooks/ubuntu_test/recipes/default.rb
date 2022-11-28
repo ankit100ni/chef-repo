@@ -40,6 +40,7 @@ bash 'Ensure SSH is configured correctly for ClientAliveInterval' do
     fi
     EOH
   only_if { (File.exist? '/etc/ssh/sshd_config') }
+  not_if "grep '^ClientAliveInterval 3$' /etc/ssh/sshd_config"
 end
 
 bash 'Ensure SSH is configured correctly for ClientAliveCountMax' do
@@ -55,6 +56,7 @@ bash 'Ensure SSH is configured correctly for ClientAliveCountMax' do
       fi
       EOH
   only_if { (File.exist? '/etc/ssh/sshd_config') }
+  not_if "grep '^ClientAliveCountMax 3$' /etc/ssh/sshd_config"
 end
 
 bash 'Ensure SSH is configured correctly for Banner' do
@@ -70,6 +72,7 @@ bash 'Ensure SSH is configured correctly for Banner' do
       fi
       EOH
   only_if { (File.exist? '/etc/ssh/sshd_config') }
+  not_if "grep '^Banner /home/ubuntu/banner.txt$' /etc/ssh/sshd_config"
 end
 
 # exec.chef.user - home - dirs
