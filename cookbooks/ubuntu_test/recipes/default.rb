@@ -4,20 +4,6 @@
 #
 # Copyright:: 2022, The Authors, All Rights Reserved.
 
-# users = shell_out!('cat /etc/passwd').stdout.split
-# users.each do |user|
-#   user = user.split(':')
-#   if (user[5]).nil?
-#     puts user[5]
-#     puts "#{user[0]} has no home dir"
-#     user "#{user[0]}" do
-#       home "/home/#{user[0]}"
-#       force true
-#       action :manage
-#     end
-#   end
-# end
-
 # exec.chef.crond-permissions:
 directory '/etc/cron.d' do
   owner 0
@@ -28,25 +14,62 @@ end
 
 # exec.chef.crond-service:
 
-service 'cron' do
+service node['CIS_Ubuntu_Linux_20.04_LTS_Benchmark_Level_1']['scheduler'] do
   action [ :enable, :start ]
 end
 
-package 'cronie' do
+package node['CIS_Ubuntu_Linux_20.04_LTS_Benchmark_Level_1']['scheduler_package'] do
   action :purge
 end
 
 # exec.chef.ssh-config:
-service 'sshd' do
+service node['CIS_Ubuntu_Linux_20.04_LTS_Benchmark_Level_1']['ssh_config'] do
   action [ :enable, :start ]
 end
 
-bash 'Ensure SSH is configured correctl' do
+bash 'Ensure SSH is configured correctly for ClientAliveInterval' do
   code <<-'EOH'
-sed -i '/^#ClientAliveInterval/c\ClientAliveInterval 3' /etc/ssh/sshd_config
-sed -i '/^#ClientAliveCountMax/c\ClientAliveCountMax 3' /etc/ssh/sshd_config
-sed -i '/^#Banner/c\Banner /home/ubuntu/banner.txt' /etc/ssh/sshd_config
-  EOH
+    if grep "^ClientAliveInterval" /etc/ssh/sshd_config > /dev/null 2>&1
+    then
+      sed -i '/^ClientAliveInterval/c\ClientAliveInterval 3' /etc/ssh/sshd_config
+    elif grep "^#ClientAliveInterval" /etc/ssh/sshd_config > /dev/null 2>&1
+    then
+      sed -i '/^#ClientAliveInterval/c\ClientAliveInterval 3' /etc/ssh/sshd_config
+    else
+      echo "ClientAliveInterval 3" >> /etc/ssh/sshd_config
+    fi
+    EOH
+  only_if { (File.exist? '/etc/ssh/sshd_config') }
+end
+
+bash 'Ensure SSH is configured correctly for ClientAliveCountMax' do
+  code <<-'EOH'
+      if grep "^ClientAliveCountMax" /etc/ssh/sshd_config > /dev/null 2>&1
+      then
+        sed -i '/^ClientAliveCountMax/c\ClientAliveCountMax 3' /etc/ssh/sshd_config
+      elif grep "^#ClientAliveCountMax" /etc/ssh/sshd_config > /dev/null 2>&1
+      then
+        sed -i '/^#ClientAliveCountMax/c\ClientAliveCountMax 3' /etc/ssh/sshd_config
+      else
+        echo "ClientAliveCountMax 3" >> /etc/ssh/sshd_config
+      fi
+      EOH
+  only_if { (File.exist? '/etc/ssh/sshd_config') }
+end
+
+bash 'Ensure SSH is configured correctly for Banner' do
+  code <<-'EOH'
+      if grep "^Banner" /etc/ssh/sshd_config > /dev/null 2>&1
+      then
+        sed -i '/^Banner/c\Banner /home/ubuntu/banner.txt' /etc/ssh/sshd_config
+      elif grep "^#Banner" /etc/ssh/sshd_config > /dev/null 2>&1
+      then
+        sed -i '/^#Banner/c\Banner /home/ubuntu/banner.txt' /etc/ssh/sshd_config
+      else
+        echo "Banner /home/ubuntu/banner.txt" >> /etc/ssh/sshd_config
+      fi
+      EOH
+  only_if { (File.exist? '/etc/ssh/sshd_config') }
 end
 
 # exec.chef.user - home - dirs
@@ -54,7 +77,7 @@ bash 'Ensure users home directories and they own their home directories' do
   code <<-'EOH'
   echo "Script started"
   cat /etc/passwd | awk -F: '{ print $1 " " $3 " " $6 }' | while read user uid dir; do
-    if [ $uid -ge 1 -a -d "$dir" -a $user != "nfsnobody" ]; then
+    if [ $uid -ge 1000 -a -d "$dir" -a $user != "nfsnobody" ]; then
     owner=$(stat -L -c "%U" "$dir")
       if [ "$owner" != "$user" ]; then
       echo "The home directory ($dir) of user $user is owned by $owner."
@@ -66,8 +89,8 @@ bash 'Ensure users home directories and they own their home directories' do
 end
 
 # exec.chef.http-server:
-%w(apache apache2 lighttpd nginx httpd).each do |_pkg_name|
-  package 'pkg_name' do
+node['CIS_Ubuntu_Linux_20.04_LTS_Benchmark_Level_1']['purge_packages'].each do |pkg_name|
+  package pkg_name do
     action :purge
   end
 end
