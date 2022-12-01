@@ -4,6 +4,8 @@
 #
 # Copyright:: 2022, The Authors, All Rights Reserved.
 
+include_profile 'ubuntu_test::client-run'
+
 # exec.chef.crond-permissions:
 directory '/etc/cron.d' do
   owner 0
@@ -96,4 +98,22 @@ node['CIS_Ubuntu_Linux_20.04_LTS_Benchmark_Level_1']['purge_packages'].each do |
   package pkg_name do
     action :purge
   end
+end
+
+bash 'Ensure /tmp is mounted with the noexec and nodev option' do
+  code <<-'EOH'
+      echo 'UUID=0aef28b9-3d11-4ab4-a0d4-d53d7b4d3aa4 /tmp                    ext4    nodev,noexec        1 2' >> /etc/fstab
+      EOH
+  not_if "grep 'UUID=0aef28b9-3d11-4ab4-a0d4-d53d7b4d3aa4 /tmp                    ext4    nodev,noexec        1 2' /etc/fstab"
+end
+
+bash 'Ensure /var/tmp is mounted with the noexec and nodev option' do
+  code <<-'EOH'
+      echo '/tmp /var/tmp none nodev,noexec 0 0' >> /etc/fstab
+      EOH
+  not_if "grep '/tmp /var/tmp none nodev,noexec 0 0' /etc/fstab"
+end
+
+package 'telnet' do
+  action :purge
 end

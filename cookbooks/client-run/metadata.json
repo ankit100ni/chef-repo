@@ -1,0 +1,37 @@
+{
+  "name": "client-run",
+  "description": "Installs/Configures client-run",
+  "long_description": "",
+  "maintainer": "John Tonello",
+  "maintainer_email": "jtonello@chef.lab",
+  "license": "All Rights Reserved",
+  "platforms": {
+
+  },
+  "dependencies": {
+
+  },
+  "providing": {
+
+  },
+  "recipes": {
+
+  },
+  "version": "0.1.0",
+  "source_url": "",
+  "issues_url": "",
+  "privacy": false,
+  "chef_versions": [
+    [
+      ">= 15.0"
+    ]
+  ],
+  "ohai_versions": [
+
+  ],
+  "gems": [
+
+  ],
+  "eager_load_libraries": true
+}
+

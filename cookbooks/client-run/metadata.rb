@@ -1,0 +1,7 @@
+name 'client-run'
+maintainer 'John Tonello'
+maintainer_email 'jtonello@chef.lab'
+license 'All Rights Reserved'
+description 'Installs/Configures client-run'
+version '0.1.1'
+chef_version '>= 15.0'
