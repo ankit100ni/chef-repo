@@ -1,0 +1,51 @@
+{
+  "revision_id": "e7ce119472e322b89d43a47cb4c7b8a79343598f79bb9cdd8cfed03d381864e6",
+  "name": "testing",
+  "run_list": [
+    "recipe[ubuntu_test::default]"
+  ],
+  "included_policy_locks": [
+
+  ],
+  "cookbook_locks": {
+    "ubuntu_test": {
+      "version": "0.1.0",
+      "identifier": "eeb05ab2fb6dc1bceebeab0116b7ace803f9fbd4",
+      "dotted_decimal_identifier": "67184948053503425.53179798301775543.190112499104724",
+      "source": "../cookbooks/ubuntu_test",
+      "cache_key": null,
+      "scm_info": {
+        "scm": "git",
+        "remote": null,
+        "revision": "2b83c8315404dcc7389f10c129915d1adbe9281a",
+        "working_tree_clean": false,
+        "published": true,
+        "synchronized_remote_branches": [
+          "origin/tesco_akash"
+        ]
+      },
+      "source_options": {
+        "path": "../cookbooks/ubuntu_test"
+      }
+    }
+  },
+  "default_attributes": {
+
+  },
+  "override_attributes": {
+
+  },
+  "solution_dependencies": {
+    "Policyfile": [
+      [
+        "ubuntu_test",
+        ">= 0.0.0"
+      ]
+    ],
+    "dependencies": {
+      "ubuntu_test (0.1.0)": [
+
+      ]
+    }
+  }
+}

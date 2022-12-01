@@ -1,0 +1,10 @@
+name: client-run
+title: Run chef-client
+maintainer: John Tonello
+copyright: John Tonello
+copyright_email: jtonello@chef.lab
+license: Apache-2.0
+summary: Run chef-client every hour
+version: 0.1.1
+supports:
+  platform: os
