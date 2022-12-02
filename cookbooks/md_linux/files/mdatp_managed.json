@@ -1,0 +1,25 @@
+{
+   "antivirusEngine":{
+      "behaviorMonitoring":"enabled",
+      "maximumOnDemandScanThreads":2,
+      "disallowedThreatActions":[
+         "allow"
+      ],
+      "threatTypeSettings":[
+         {
+            "key":"potentially_unwanted_application",
+            "value":"audit"
+         },
+         {
+            "key":"archive_bomb",
+            "value":"audit"
+         }
+      ]
+   },
+   "cloudService":{
+      "enabled":true,
+      "diagnosticLevel":"optional",
+      "automaticSampleSubmissionConsent":"none",
+      "automaticDefinitionUpdateEnabled":true
+   }
+}

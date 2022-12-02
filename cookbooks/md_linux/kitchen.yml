@@ -1,0 +1,38 @@
+---
+driver:
+  name: ec2
+  aws_ssh_key_id: Ankit
+  region: ap-south-1
+  availability_zone: ap-south-1a
+  require_chef_omnibus: true
+  security_group_ids: sg-023c539e9f83ee5c6
+  subnet_id: subnet-1aef0973
+  associate_public_ip: true
+  interface: dns
+  tags:
+    Name: "Kitchen Ec2 Instance"
+    X-Contact: "ankit.soni@progress.com"
+    X-Dept: "PS"
+    X-TTL: "30"
+
+
+provisioner:
+  name: chef_zero
+
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: amazon
+    driver:
+      image_id: ami-0763cf792771fe1bd # Centos 7
+    transport:
+      username: centos
+      ssh_key: /Users/anksoni/Documents/Docs/SecurityPass/AWSKeys/Ankit.pem
+
+suites:
+  - name: default
+    verifier:
+      inspec_tests:
+        - test/integration/default  
