@@ -19,7 +19,7 @@ cookbook_file "#{Chef::Config[:file_cache_path]}/MicrosoftDefenderATPOnboardingL
   action :create_if_missing
 end
 
-%w(audit audit-libs).each do |pkg|
+%w(audit audit-libs python3).each do |pkg|
   package pkg
 end
 
@@ -30,18 +30,20 @@ end
 bash 'Tesco_MDE_Install_Linux' do
   code <<-EOH
   cd #{Chef::Config[:file_cache_path]}
-  chmod 777 mdatp_managed.json Tesco-MDE_Installer.sh MicrosoftDefenderATPOnboardingLinuxServer.py
+  chmod 700 mdatp_managed.json Tesco-MDE_Installer.sh MicrosoftDefenderATPOnboardingLinuxServer.py
   sudo sh Tesco-MDE_Installer.sh --install --yes
   EOH
   action :run
-  not_if 'mdatp health --field healthy'
-  not_if 'mdatp health --field licensed'
+  not_if { (File.exist? '/opt/microsoft/mdatp/sbin/wdavdaemon') }
 end
 
 bash 'turn_mdatp_passive' do
   code <<-EOH
-  sudo mdatp config passive-mode --value enabled
+  if [[ $(mdatp health --field passive_mode_enabled) != 'true' ]]
+  then
+    mdatp config passive-mode --value enabled
+  fi
   EOH
   action :run
-  not_if 'mdatp health --field passive_mode_enabled'
+  live_stream true
 end
