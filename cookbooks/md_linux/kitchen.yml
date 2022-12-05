@@ -29,11 +29,11 @@ verifier:
 platforms:
   - name: amazon
     driver:
-      # image_id: ami-0763cf792771fe1bd # Centos 7
-      image_id: ami-06e706b217afe2a5c # RHEL7
+      image_id: ami-0763cf792771fe1bd # Centos 7
+      # image_id: ami-06e706b217afe2a5c # RHEL7
       # image_id: ami-05c8ca4485f8b138a # RHEL 8
     transport:
-      username: ec2-user
+      username: centos
       ssh_key: /Users/anksoni/Documents/Docs/SecurityPass/AWSKeys/Ankit.pem
 
 suites:
