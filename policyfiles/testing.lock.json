@@ -1,5 +1,5 @@
 {
-  "revision_id": "e7ce119472e322b89d43a47cb4c7b8a79343598f79bb9cdd8cfed03d381864e6",
+  "revision_id": "597c865af954b2b9ee71a4f3b59a0da88be9776c442ead928c910eb67bd267bd",
   "name": "testing",
   "run_list": [
     "recipe[ubuntu_test::default]"
@@ -10,14 +10,14 @@
   "cookbook_locks": {
     "ubuntu_test": {
       "version": "0.1.0",
-      "identifier": "eeb05ab2fb6dc1bceebeab0116b7ace803f9fbd4",
-      "dotted_decimal_identifier": "67184948053503425.53179798301775543.190112499104724",
+      "identifier": "06e2150020676b0014073c9e4d145025c0af176e",
+      "dotted_decimal_identifier": "1937429684578155.22021314333972.88123076712302",
       "source": "../cookbooks/ubuntu_test",
       "cache_key": null,
       "scm_info": {
         "scm": "git",
         "remote": null,
-        "revision": "2b83c8315404dcc7389f10c129915d1adbe9281a",
+        "revision": "a764b6413b436e270a18f344f30c374612b9c75f",
         "working_tree_clean": false,
         "published": true,
         "synchronized_remote_branches": [

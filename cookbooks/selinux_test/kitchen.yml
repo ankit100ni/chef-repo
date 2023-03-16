@@ -5,7 +5,7 @@ driver:
   region: ap-south-1
   availability_zone: ap-south-1a
   require_chef_omnibus: true
-  security_group_ids: sg-023c539e9f83ee5c6
+  security_group_ids: sg-0526275f87a5660af
   subnet_id: subnet-1aef0973
   associate_public_ip: true
   interface: dns
@@ -26,9 +26,9 @@ verifier:
 platforms:
   - name: amazon
     driver:
-      image_id: ami-06489866022e12a14
+      image_id: ami-03d3eec31be6ef6f9
     transport:
-      username: ec2-user
+      username: ubuntu
       ssh_key: /Users/anksoni/Documents/Docs/SecurityPass/AWSKeys/Ankit.pem
 
 suites:

@@ -1,0 +1,10 @@
+---
+# Cookbook:: ubuntu_test
+
+# Additional information can be found on the Chef InSpec Documentation site https://docs.chef.io/inspec/waivers/
+
+# Example Syntax:
+exec.chef.tomcat:
+  expiration_date: 2050-12-31
+  run: false
+  justification: "Control waived for testing."

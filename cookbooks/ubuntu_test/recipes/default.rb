@@ -4,7 +4,13 @@
 #
 # Copyright:: 2022, The Authors, All Rights Reserved.
 
-include_profile 'ubuntu_test::client-run'
+include_profile 'ubuntu_test::WaiverRun'
+
+# Copying waiver profile to temp location
+cookbook_file '/tmp/exemptions.yml' do
+  source 'exemptions.yml'
+  action :create
+end
 
 # exec.chef.crond-permissions:
 directory '/etc/cron.d' do
@@ -16,9 +22,9 @@ end
 
 # exec.chef.crond-service:
 
-service node['CIS_Ubuntu_Linux_20.04_LTS_Benchmark_Level_1']['scheduler'] do
-  action [ :enable, :start ]
-end
+# service node['CIS_Ubuntu_Linux_20.04_LTS_Benchmark_Level_1']['scheduler'] do
+#   action [ :enable, :start ]
+# end
 
 package node['CIS_Ubuntu_Linux_20.04_LTS_Benchmark_Level_1']['scheduler_package'] do
   action :purge

@@ -1,5 +1,5 @@
 {
-  "revision_id": "c368932052e5be1ba795ea678c7b73d5d8942b2389b543199172884f51c0d7f2",
+  "revision_id": "503738abfba403c4061b701c59bf4e5d362d0092a1ca928c0769c974be3321d7",
   "name": "client-run",
   "run_list": [
     "recipe[client-run::default]"
@@ -10,18 +10,18 @@
   "cookbook_locks": {
     "client-run": {
       "version": "0.1.0",
-      "identifier": "294613ab2cf0197868f8c344ee449c6bfc645d44",
-      "dotted_decimal_identifier": "11617524335308825.33892414842531396.171987609869636",
+      "identifier": "4ce2a07d3f399369fb3196524a72534c0568a9f4",
+      "dotted_decimal_identifier": "21641277153950099.29831062948563570.91585973365236",
       "source": ".",
       "cache_key": null,
       "scm_info": {
         "scm": "git",
         "remote": null,
-        "revision": null,
-        "working_tree_clean": true,
-        "published": false,
+        "revision": "a764b6413b436e270a18f344f30c374612b9c75f",
+        "working_tree_clean": false,
+        "published": true,
         "synchronized_remote_branches": [
-
+          "origin/tesco_akash"
         ]
       },
       "source_options": {

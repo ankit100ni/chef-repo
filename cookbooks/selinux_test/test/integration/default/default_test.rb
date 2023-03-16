@@ -1,16 +1,15 @@
-# Chef InSpec test for recipe test::default
+# Chef InSpec test for recipe selinux_test::default
 
 # The Chef InSpec reference, with examples and extensive documentation, can be
 # found at https://docs.chef.io/inspec/resources/
-require pry
 
 unless os.windows?
   # This is an example test, replace with your own test.
-  describe user('root') do 
+  describe user('root'), :skip do
     it { should exist }
   end
 end
-binding.pry
+
 # This is an example test, replace it with your own test.
 describe port(80), :skip do
   it { should_not be_listening }
