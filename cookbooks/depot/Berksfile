@@ -1,0 +1,3 @@
+source 'https://supermarket.chef.io'  # Specify the default source for cookbooks
+
+cookbook 'test', git: 'https://github.com/ankit100ni/test.git', branch: 'main'
